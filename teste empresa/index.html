@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Programação Simples</title>
+</head>
+<body>
+    <h1>Teste de Programação em JavaScript</h1>
+
+    <!-- 1) Cálculo da Soma -->
+    <section>
+        <h2>1) Cálculo da Soma</h2>
+        <button onclick="calcularSoma()">Calcular Soma</button>
+        <p id="resultado-soma"></p>
+    </section>
+
+    <!-- 2) Sequência de Fibonacci -->
+    <section>
+        <h2>2) Sequência de Fibonacci</h2>
+        <input type="number" id="numero-fibonacci" placeholder="Digite um número">
+        <button onclick="verificarFibonacci()">Verificar Fibonacci</button>
+        <p id="resultado-fibonacci"></p>
+    </section>
+
+    <!-- 3) Análise de Faturamento -->
+    <section>
+        <h2>3) Análise de Faturamento</h2>
+        <button onclick="analisarFaturamento()">Analisar Faturamento</button>
+        <p id="resultado-faturamento"></p>
+    </section>
+
+    <!-- 4) Percentual de Representação -->
+    <section>
+        <h2>4) Percentual de Representação</h2>
+        <button onclick="calcularPercentuais()">Calcular Percentuais</button>
+        <p id="resultado-percentuais"></p>
+    </section>
+
+    <!-- 5) Inverter uma String -->
+    <section>
+        <h2>5) Inverter uma String</h2>
+        <input type="text" id="string-para-inverter" placeholder="Digite uma string">
+        <button onclick="inverterString()">Inverter String</button>
+        <p id="resultado-inverter"></p>
+    </section>
+
+    <script>
+        // 1) Cálculo da Soma
+        function calcularSoma() {
+            let indice = 13;
+            let soma = 0;
+            for (let k = 1; k <= indice; k++) {
+                soma += k;
+            }
+            document.getElementById('resultado-soma').innerText = 'Soma: ' + soma;
+        }
+
+        // 2) Sequência de Fibonacci
+        function verificarFibonacci() {
+            let num = parseInt(document.getElementById('numero-fibonacci').value, 10);
+            let a = 0;
+            let b = 1;
+            while (a < num) {
+                let temp = a;
+                a = b;
+                b = temp + b;
+            }
+            let resultado = a === num ? num + " pertence à sequência de Fibonacci." : num + " não pertence à sequência de Fibonacci.";
+            document.getElementById('resultado-fibonacci').innerText = resultado;
+        }
+
+        // 3) Análise de Faturamento
+        function analisarFaturamento() {
+            const faturamento = [500, 300, 0, 400, 600, 0, 200, 800, 0, 500, 300, 100, 0, 400, 0, 600, 500, 300, 200, 400, 600, 0, 200, 500, 100, 0, 300, 400, 500, 600, 200, 0, 100, 300, 400, 500, 600, 0, 200, 300, 400, 500, 600, 0, 100, 200, 300, 400, 500, 600, 0, 100, 200, 300, 400, 500];
+            
+            let total = 0;
+            let diasComFaturamento = 0;
+            let menor = Number.POSITIVE_INFINITY;
+            let maior = Number.NEGATIVE_INFINITY;
+            
+            for (let i = 0; i < faturamento.length; i++) {
+                let valor = faturamento[i];
+                if (valor > 0) {
+                    total += valor;
+                    diasComFaturamento++;
+                    if (valor < menor) menor = valor;
+                    if (valor > maior) maior = valor;
+                }
+            }
+            
+            const media = total / diasComFaturamento;
+            let acimaDaMedia = 0;
+            
+            for (let i = 0; i < faturamento.length; i++) {
+                if (faturamento[i] > media) {
+                    acimaDaMedia++;
+                }
+            }
+            
+            document.getElementById('resultado-faturamento').innerText = 
+                `Menor valor de faturamento: R$${menor.toFixed(2)}\n` +
+                `Maior valor de faturamento: R$${maior.toFixed(2)}\n` +
+                `Número de dias acima da média: ${acimaDaMedia}`;
+        }
+
+        // 4) Percentual de Representação
+        function calcularPercentuais() {
+            const faturamentoEstados = {
+                "SP": 67836.43,
+                "RJ": 36678.66,
+                "MG": 29229.88,
+                "ES": 27165.48,
+                "Outros": 19849.53
+            };
+            
+            let total = 0;
+            for (let estado in faturamentoEstados) {
+                total += faturamentoEstados[estado];
+            }
+            
+            let resultado = '';
+            for (let estado in faturamentoEstados) {
+                let percentual = (faturamentoEstados[estado] / total) * 100;
+                resultado += `${estado}: ${percentual.toFixed(2)}%\n`;
+            }
+            
+            document.getElementById('resultado-percentuais').innerText = resultado;
+        }
+
+        // 5) Inverter uma String
+        function inverterString() {
+            let str = document.getElementById('string-para-inverter').value;
+            let invertida = '';
+            for (let i = str.length - 1; i >= 0; i--) {
+                invertida += str[i];
+            }
+            document.getElementById('resultado-inverter').innerText = 'String invertida: ' + invertida;
+        }
+    </script>
+</body>
+</html>
